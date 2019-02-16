@@ -1,3 +1,6 @@
 .vs
 Debug
 x64
+apex.vcxproj
+apex.vcxproj.user
+apex.vcxproj.filters
