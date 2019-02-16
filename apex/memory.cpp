@@ -74,7 +74,6 @@ ptr Memory::SigScan(const char* pattern, const char* module)
 {
 	HMODULE mod = GetModuleBaseAddress(module);
 	MODULEINFO info;
-	GetModuleInformation(GetCurrentProcess(), mod, &info, sizeof(info));
 
 	/*PIMAGE_NT_HEADERS64 nthdr = Memory::GetNTHeader(mod);
 	if (nthdr == nullptr)
@@ -85,7 +84,7 @@ ptr Memory::SigScan(const char* pattern, const char* module)
 	std::string signature = HexToBytes(pattern);
 
 	uchar first = (uchar)signature.at(0);
-	uchar* end = (base + info.SizeOfImage) - signature.length();
+	uchar* end = (base + dwImageSize) - signature.length();
 
 	for (; base < end; ++base)
 	{
