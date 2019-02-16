@@ -75,9 +75,11 @@ ptr Memory::SigScan(const char* pattern, const char* module)
 	HMODULE mod = GetModuleBaseAddress(module);
 	MODULEINFO info;
 
-	/*PIMAGE_NT_HEADERS64 nthdr = Memory::GetNTHeader(mod);
+	PIMAGE_NT_HEADERS nthdr = Memory::GetNTHeader(Memory::GetModuleBaseAddress(("r5apex.exe")));
 	if (nthdr == nullptr)
-		return NULL;*/
+		return nullptr;
+
+	DWORD64 dwImageSize = (DWORD64)nthdr->OptionalHeader.SizeOfImage;
 
 	uchar* base = (uchar*)mod;
 

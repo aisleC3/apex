@@ -29,9 +29,6 @@
 #include <sstream>
 #include <cmath>
 
-extern DWORD dwImageSize;
-extern DWORD dwImageBase;
-
 // core
 #include "memory.h"
 #include "vmt.h"
