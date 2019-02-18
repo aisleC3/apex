@@ -55,9 +55,9 @@ void Menu::Render()
 
 	ImGui::SetNextWindowSize(ImVec2(480, 500));
 
-	if (ImGui::Begin("Apex Legends by Phoenix Digital Group", &is_open, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_ShowBorders))
+	if (ImGui::Begin(XorStr("Apex Legends by Phoenix Digital Group"), &is_open, ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_ShowBorders))
 	{
-		std::list<std::string> tabs = { "aimbot", "visuals", "misc" };
+		std::list<std::string> tabs = { XorStr("aimbot"), XorStr("visuals"), XorStr("misc") };
 
 		int i = 0;
 		for (const auto& tab : tabs)
@@ -75,16 +75,16 @@ void Menu::Render()
 
 		switch (page)
 		{
-			case 0:
-			{
-				AimbotTab();
-				break;
-			}
-			case 1:
-			{
-				VisualsTab();
-				break;
-			}
+		case 0:
+		{
+			AimbotTab();
+			break;
+		}
+		case 1:
+		{
+			VisualsTab();
+			break;
+		}
 		}
 
 		ImGui::End();
@@ -93,33 +93,33 @@ void Menu::Render()
 
 void Menu::AimbotTab()
 {
-	ImGui::Text("Aimbot");
+	ImGui::Text(XorStr("Aimbot"));
 	ImGui::Separator();
 
-	ImGui::Checkbox("Active", &var.aimbot_active);
-	ImGui::SliderInt("Field of View", &var.aimbot_fov, 0, 90);
+	ImGui::Checkbox(XorStr("Active"), &var.aimbot_active);
+	ImGui::SliderInt(XorStr("Field of View"), &var.aimbot_fov, 0, 90);
 }
 
 void Menu::VisualsTab()
 {
-	ImGui::Text("Players");
+	ImGui::Text(XorStr("Players"));
 	ImGui::Separator();
 
-	ImGui::Checkbox("Active", &var.visuals_players_active);
-	ImGui::Checkbox("Name", &var.visuals_players_name);
+	ImGui::Checkbox(XorStr("Active"), &var.visuals_players_active);
+	ImGui::Checkbox(XorStr("Name"), &var.visuals_players_name);
 
-	ImGui::Checkbox("Bounding Box", &var.visuals_players_box);
+	ImGui::Checkbox(XorStr("Bounding Box"), &var.visuals_players_box);
 	{
-		ImGui::SameLine(); ImGui::Text("->");
-		ImGui::SameLine(); ImGui::Checkbox("Outline", &var.visuals_players_box_outline);
-		ImGui::SameLine(); ImGui::Checkbox("3D", &var.visuals_players_box_3d);
+		ImGui::SameLine(); ImGui::Text(XorStr("->"));
+		ImGui::SameLine(); ImGui::Checkbox(XorStr("Outline"), &var.visuals_players_box_outline);
+		ImGui::SameLine(); ImGui::Checkbox(XorStr("3D"), &var.visuals_players_box_3d);
 	}
 
-	ImGui::Checkbox("Health Bar", &var.visuals_players_hpbar);
-	ImGui::Checkbox("Snapline", &var.visuals_players_snapline);
+	ImGui::Checkbox(XorStr("Health Bar"), &var.visuals_players_hpbar);
+	ImGui::Checkbox(XorStr("Snapline"), &var.visuals_players_snapline);
 
 	ImGui::Dummy(ImVec2(0, 20));
-	ImGui::Text("Entities");
+	ImGui::Text(XorStr("Entities"));
 	ImGui::Separator();
 }
 

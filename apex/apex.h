@@ -32,6 +32,7 @@
 // core
 #include "memory.h"
 #include "vmt.h"
+#include "xorstr.h"
 
 // sdk
 #include "sdk\vector.h"

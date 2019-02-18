@@ -2,7 +2,7 @@
 
 bool Interfaces::Init()
 {
-	game_base = (DWORD_PTR)Memory::GetModuleBaseAddress("r5apex.exe");
+	game_base = (DWORD_PTR)Memory::GetModuleBaseAddress(XorStr("r5apex.exe"));
 	if (!game_base)
 		return false;
 
@@ -10,20 +10,20 @@ bool Interfaces::Init()
 	if (!swapchain)
 		return false;
 
+	enginetrace = (CEngineTrace*)GetInterface(XorStr("EngineTraceClient004"), true);
+	if (!enginetrace)
+		return false;
+
 	engine = *(CEngineClient**)(game_base + 0xC1891A8); //48 8B 0D ? ? ? ? 48 8D 54 24 ? E8 ? ? ? ? 48 8B 5C 24 ? + 1
 	if (!engine)
 		return false;
 
-	enginetrace = (CEngineTrace*)GetInterface("EngineTraceClient004", true);
-	if (!enginetrace)
-		return false;
-
-	client = (IBaseClientDLL*)GetInterface("VClient");
-	if (!client)
-		return false;
-
-	entlist = (CClientEntityList*)GetInterface("VClientEntityList003", true);
+	entlist = (CClientEntityList*)GetInterface(XorStr("VClientEntityList003"), true);
 	if (!entlist)
+		return false;
+
+	client = (IBaseClientDLL*)GetInterface(XorStr("VClient"));
+	if (!client)
 		return false;
 
 	return true;
@@ -33,11 +33,9 @@ ptr Interfaces::GetInterface(const std::string& name, bool force)
 {
 	ptr interfaceptr;
 
-	FnCreateInterface CreateInterface = (FnCreateInterface)(Memory::SigScan("48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC 20 48 8B 1D ? ? ? ? 48 8B FA", "r5apex.exe"));
+	FnCreateInterface CreateInterface = (FnCreateInterface)(Memory::SigScan(XorStr("48 89 5C 24 ? 48 89 6C 24 ? 48 89 74 24 ? 57 48 83 EC 20 48 8B 1D ? ? ? ? 48 8B FA"), XorStr("r5apex.exe")));
 	//if (!CreateInterface)
-		//return NULL;
-
-	//MessageBoxA(NULL, "no", NULL, NULL);
+	//return NULL;
 
 	if (!force)
 	{

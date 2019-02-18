@@ -6,11 +6,8 @@ DWORD dwImageBase = NULL;
 
 void Init()
 {
-	if (!interfaces.Init())
-		MessageBoxA(NULL, "Interfaces: Failed to init.", NULL, NULL);
-
-	if (!hooks.Init())
-		MessageBoxA(NULL, "PresentHook: Failed to init.", NULL, NULL);
+	interfaces.Init();
+	hooks.Init();
 }
 
 DWORD __stdcall DllMain(HMODULE dll, DWORD callreason, void* reserved)
